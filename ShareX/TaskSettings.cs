@@ -380,6 +380,7 @@ namespace ShareX
         public bool CaptureClientArea = false;
         public bool CaptureAutoHideTaskbar = false;
         public bool CaptureAutoHideDesktopIcons = false;
+        public bool CaptureHDRToSDR = true;
         public Rectangle CaptureCustomRegion = new Rectangle(0, 0, 0, 0);
         public string CaptureCustomWindow = "";
 

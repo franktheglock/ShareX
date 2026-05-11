@@ -38,6 +38,7 @@ namespace ShareX.ScreenCaptureLib
         public bool CaptureShadow { get; set; } = false;
         public int ShadowOffset { get; set; } = 20;
         public bool AutoHideTaskbar { get; set; } = false;
+        public bool CaptureHDRToSDR { get; set; } = true;
 
         public Bitmap CaptureRectangle(Rectangle rect)
         {
@@ -120,6 +121,29 @@ namespace ShareX.ScreenCaptureLib
             if (rect.Width == 0 || rect.Height == 0)
             {
                 return null;
+            }
+
+            if (handle == NativeMethods.GetDesktopWindow() && CaptureHDRToSDR)
+            {
+                Bitmap hdrCapture = HDRToSDRScreenCapture.Capture(rect);
+
+                if (hdrCapture != null)
+                {
+                    if (captureCursor)
+                    {
+                        try
+                        {
+                            CursorData cursorData = new CursorData();
+                            cursorData.DrawCursor(hdrCapture, rect.Location);
+                        }
+                        catch (Exception e)
+                        {
+                            DebugHelper.WriteException(e, "Cursor capture failed.");
+                        }
+                    }
+
+                    return hdrCapture;
+                }
             }
 
             IntPtr hdcSrc = NativeMethods.GetWindowDC(handle);
