@@ -45,11 +45,11 @@
                   IsChecked="{Binding EditorUseSystemTheme, Mode=TwoWay}"
                   Margin="0,0,0,10"/>
 
-        <StackPanel Spacing="4" Margin="0,0,0,12">
+        <StackPanel Spacing="4" Margin="0,0,0,12"
+                    IsVisible="{Binding CanEditEditorTheme}">
             <TextBlock Text="Theme"/>
             <ComboBox ItemsSource="{Binding EditorThemeOptions}"
                       SelectedItem="{Binding EditorTheme, Mode=TwoWay}"
-                      IsEnabled="{Binding CanEditEditorTheme}"
                       HorizontalAlignment="Stretch"/>
         </StackPanel>
 
@@ -57,10 +57,10 @@
                   IsChecked="{Binding EditorUseSystemAccentColor, Mode=TwoWay}"
                   Margin="0,0,0,10"/>
 
-        <StackPanel Spacing="4" Margin="0,0,0,18">
+        <StackPanel Spacing="4" Margin="0,0,0,18"
+                    IsVisible="{Binding CanEditEditorAccentColor}">
             <TextBlock Text="Accent color"/>
             <controls:ColorPickerDropdown SelectedColorValue="{Binding EditorAccentColor, Mode=TwoWay}"
-                                          IsEnabled="{Binding CanEditEditorAccentColor}"
                                           HorizontalAlignment="Stretch"/>
         </StackPanel>
 
